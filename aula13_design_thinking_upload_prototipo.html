@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atividade Prática – Desafio Design Thinking</title>
+  <style>
+    :root {
+      --azul: #0f4cbb;
+      --roxo: #6d28d9;
+      --ciano: #00bcd4;
+      --laranja: #f97316;
+      --verde: #16a34a;
+      --texto: #172033;
+      --muted: #64748b;
+      --borda: #d7e3f5;
+      --fundo: #f1f7ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0,188,212,.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(109,40,217,.16), transparent 32%),
+        var(--fundo);
+      color: var(--texto);
+    }
+
+    header {
+      background: linear-gradient(135deg, #061733, var(--azul), var(--roxo));
+      color: white;
+      text-align: center;
+      padding: 36px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "EMPATIZAR • DEFINIR • IDEAR • PROTOTIPAR • TESTAR";
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      right: 0;
+      opacity: .13;
+      font-size: 1.7rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      white-space: nowrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      max-width: 920px;
+      margin: 14px auto 0;
+      font-size: 1.08rem;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 24px auto 44px;
+      padding: 0 16px;
+    }
+
+    .section {
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--borda);
+      border-radius: 22px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 26px rgba(15, 76, 187, .10);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      color: #073b8e;
+      font-size: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #102a56;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 11px;
+      font-size: .96rem;
+      background: white;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--ciano);
+      box-shadow: 0 0 0 3px rgba(0,188,212,.16);
+    }
+
+    textarea {
+      min-height: 84px;
+      resize: vertical;
+    }
+
+    .challenge {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 18px;
+      align-items: center;
+      background: linear-gradient(135deg, #eff6ff, #f5f3ff);
+      border-left: 8px solid var(--roxo);
+      border-radius: 18px;
+      padding: 18px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .bigicon {
+      width: 76px;
+      height: 76px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      background: white;
+      font-size: 2.5rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,.08);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .step-pill {
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 8px 18px rgba(15,23,42,.10);
+    }
+
+    .s1 { background: #0d9488; }
+    .s2 { background: #2563eb; }
+    .s3 { background: #f97316; }
+    .s4 { background: #7c3aed; }
+    .s5 { background: #16a34a; }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .tip {
+      background: #fff7ed;
+      border-left: 8px solid #fb923c;
+      border-radius: 16px;
+      padding: 15px;
+      line-height: 1.5;
+      margin-top: 12px;
+    }
+
+    .upload-box {
+      background: #f5f3ff;
+      border: 2px dashed #7c3aed;
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 12px;
+    }
+
+    .upload-box strong {
+      color: #4c1d95;
+    }
+
+    .stage {
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 20px;
+      background: white;
+      border: 1px solid var(--borda);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, .07);
+    }
+
+    .stage-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .stage-number {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .stage-title strong {
+      display: block;
+      font-size: 1.45rem;
+      color: #082f73;
+    }
+
+    .stage-title span {
+      display: block;
+      color: var(--muted);
+      font-size: .95rem;
+      margin-top: 2px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--borda);
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #0f4cbb;
+      color: white;
+      text-align: left;
+    }
+
+    td:first-child {
+      width: 60px;
+      text-align: center;
+      font-weight: 900;
+      color: var(--azul);
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .check-item {
+      background: #eef6ff;
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 12px;
+      font-weight: 700;
+    }
+
+    .rubric {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .rubric-card {
+      background: #f8fbff;
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .rubric-card strong {
+      color: var(--azul);
+      font-size: 1.3rem;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: 900;
+      cursor: pointer;
+      color: white;
+      background: var(--azul);
+    }
+
+    button:hover { filter: brightness(.92); }
+
+    .danger { background: #dc2626; }
+    .green { background: #16a34a; }
+
+    footer {
+      text-align: center;
+      padding: 22px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 980px) {
+      .grid-3, .grid-2, .steps, .rubric, .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .challenge {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .bigicon { margin: auto; }
+    }
+
+    @media print {
+      body { background: white; }
+      header, .section, .stage { box-shadow: none; }
+      .actions, button { display: none; }
+      .section, .stage { break-inside: avoid; }
+      input, textarea, select { border: 1px solid #999; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Desafio Design Thinking</h1>
+    <p>Entenda um problema real, gere ideias, crie uma proposta de solução e envie um protótipo visual junto com a atividade.</p>
+  </header>
+
+  <main>
+    <section class="section">
+      <h2>1. Desafio da Atividade</h2>
+      <div class="challenge">
+        <div class="bigicon">💡</div>
+        <div>
+          Você faz parte de uma equipe de inovação. Sua missão é identificar um problema real do ambiente escolar e propor uma solução utilizando as etapas do Design Thinking.
+          A solução deve ser pensada para pessoas reais, e não apenas baseada em achismos.
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step-pill s1">1. Empatizar</div>
+        <div class="step-pill s2">2. Definir</div>
+        <div class="step-pill s3">3. Idear</div>
+        <div class="step-pill s4">4. Prototipar</div>
+        <div class="step-pill s5">5. Testar</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>2. Identificação</h2>
+      <div class="grid-3">
+        <div>
+          <label>Nome do aluno</label>
+          <input type="text" placeholder="Digite seu nome completo">
+        </div>
+        <div>
+          <label>Turma</label>
+          <input type="text" placeholder="Ex: 2ª Série">
+        </div>
+        <div>
+          <label>Data</label>
+          <input type="date">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>3. Orientação</h2>
+      <div class="tip">
+        Não comece pela solução. Primeiro entenda quem sofre com o problema. Depois defina o desafio, gere ideias, escolha uma proposta, crie um protótipo visual em outra ferramenta e anexe a imagem no Classroom junto com esta atividade.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>4. Aplicando o Design Thinking</h2>
+
+      <div class="stage">
+        <div class="stage-title">
+          <div class="stage-number s1">1</div>
+          <div>
+            <strong>Empatizar</strong>
+            <span>Entenda as pessoas afetadas pelo problema.</span>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label>Qual problema real da escola você escolheu?</label>
+            <textarea placeholder="Ex: alunos esquecem datas de provas e entregas."></textarea>
+          </div>
+          <div>
+            <label>Quem é afetado por esse problema?</label>
+            <textarea placeholder="Ex: estudantes, professores, equipe pedagógica, familiares."></textarea>
+          </div>
+          <div>
+            <label>Como esse problema afeta essas pessoas?</label>
+            <textarea placeholder="Explique as consequências do problema no dia a dia."></textarea>
+          </div>
+          <div>
+            <label>Que pergunta você faria para entender melhor o problema?</label>
+            <textarea placeholder="Ex: O que mais dificulta sua organização nos estudos?"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-title">
+          <div class="stage-number s2">2</div>
+          <div>
+            <strong>Definir</strong>
+            <span>Transforme a observação em um desafio claro.</span>
+          </div>
+        </div>
+
+        <label>Escreva o desafio principal no formato: “Como podemos...?”</label>
+        <textarea placeholder="Ex: Como podemos ajudar os alunos a organizar melhor suas atividades e prazos escolares?"></textarea>
+
+        <div class="tip">
+          Um bom problema não é genérico. “Melhorar a escola” é amplo demais. “Reduzir atrasos nas entregas de atividades” é mais claro e possível de resolver.
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-title">
+          <div class="stage-number s3">3</div>
+          <div>
+            <strong>Idear</strong>
+            <span>Gere várias ideias antes de escolher uma solução.</span>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Nº</th>
+              <th>Ideia de solução</th>
+              <th>Por que essa ideia pode funcionar?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><textarea placeholder="Digite a primeira ideia."></textarea></td>
+              <td><textarea placeholder="Explique rapidamente."></textarea></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><textarea placeholder="Digite a segunda ideia."></textarea></td>
+              <td><textarea placeholder="Explique rapidamente."></textarea></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><textarea placeholder="Digite a terceira ideia."></textarea></td>
+              <td><textarea placeholder="Explique rapidamente."></textarea></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><textarea placeholder="Digite a quarta ideia."></textarea></td>
+              <td><textarea placeholder="Explique rapidamente."></textarea></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><textarea placeholder="Digite a quinta ideia."></textarea></td>
+              <td><textarea placeholder="Explique rapidamente."></textarea></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+        <label>Qual ideia foi escolhida como melhor solução?</label>
+        <textarea placeholder="Escolha uma das ideias e justifique."></textarea>
+      </div>
+
+      <div class="stage">
+        <div class="stage-title">
+          <div class="stage-number s4">4</div>
+          <div>
+            <strong>Prototipar</strong>
+            <span>Crie uma imagem do protótipo e anexe junto com a atividade.</span>
+          </div>
+        </div>
+
+        <div class="upload-box">
+          <strong>Upload do Protótipo</strong>
+          <p>
+            Crie um protótipo simples da sua solução utilizando Canva, Figma, PowerPoint, Paint ou desenho em papel fotografado.
+            Salve como imagem em formato <strong>.PNG</strong> ou <strong>.JPG</strong> e anexe no Google Classroom junto com esta atividade.
+          </p>
+
+          <div class="checklist">
+            <div class="check-item">📱 Pode ser tela de aplicativo</div>
+            <div class="check-item">🌐 Pode ser página de site</div>
+            <div class="check-item">🖥️ Pode ser sistema ou painel</div>
+            <div class="check-item">📢 Pode ser campanha ou serviço</div>
+            <div class="check-item">📦 Pode ser produto físico</div>
+            <div class="check-item">📷 Pode ser foto de desenho no papel</div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="grid-3">
+          <div>
+            <label>Nome da solução</label>
+            <input type="text" placeholder="Ex: Agenda Escolar Inteligente">
+          </div>
+          <div>
+            <label>Ferramenta utilizada</label>
+            <select>
+              <option>Selecione</option>
+              <option>Canva</option>
+              <option>Figma</option>
+              <option>PowerPoint</option>
+              <option>Paint</option>
+              <option>Papel fotografado</option>
+              <option>Outra ferramenta</option>
+            </select>
+          </div>
+          <div>
+            <label>Nome do arquivo anexado</label>
+            <input type="text" placeholder="Ex: prototipo_agenda_escolar.png">
+          </div>
+        </div>
+
+        <br>
+
+        <label>Descrição do protótipo</label>
+        <textarea placeholder="Explique como sua solução funciona, quais partes ela possui, como o usuário utilizaria e por que ela ajuda a resolver o problema escolhido."></textarea>
+      </div>
+
+      <div class="stage">
+        <div class="stage-title">
+          <div class="stage-number s5">5</div>
+          <div>
+            <strong>Testar</strong>
+            <span>Pense no feedback dos usuários e nas melhorias.</span>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div>
+            <label>Feedback 1</label>
+            <textarea placeholder="Que melhoria um colega poderia sugerir?"></textarea>
+          </div>
+          <div>
+            <label>Feedback 2</label>
+            <textarea placeholder="Que ponto pode estar confuso ou incompleto?"></textarea>
+          </div>
+          <div>
+            <label>Feedback 3</label>
+            <textarea placeholder="Que recurso poderia ser melhorado?"></textarea>
+          </div>
+        </div>
+
+        <br>
+
+        <label>Após os testes, qual melhoria você faria na solução?</label>
+        <textarea placeholder="Explique a principal mudança que você faria depois de ouvir os usuários."></textarea>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>5. Reflexão Final</h2>
+      <div class="grid-3">
+        <div>
+          <label>O que você aprendeu sobre Design Thinking?</label>
+          <textarea placeholder="Explique com suas palavras."></textarea>
+        </div>
+        <div>
+          <label>Como a empatia ajudou na criação da solução?</label>
+          <textarea placeholder="Explique por que ouvir o usuário muda a solução."></textarea>
+        </div>
+        <div>
+          <label>Sua ideia resolveria o problema? Por quê?</label>
+          <textarea placeholder="Justifique de forma crítica."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>6. Critérios de Avaliação</h2>
+      <div class="rubric">
+        <div class="rubric-card">
+          <strong>4 pts</strong>
+          <p>Empatia</p>
+        </div>
+        <div class="rubric-card">
+          <strong>4 pts</strong>
+          <p>Definição do problema</p>
+        </div>
+        <div class="rubric-card">
+          <strong>4 pts</strong>
+          <p>Criatividade das ideias</p>
+        </div>
+        <div class="rubric-card">
+          <strong>4 pts</strong>
+          <p>Protótipo anexado</p>
+        </div>
+        <div class="rubric-card">
+          <strong>4 pts</strong>
+          <p>Reflexão final</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>7. Entrega</h2>
+      <p><strong>Arquivo 1:</strong> Aula13_Design_Thinking_NomeAluno.pdf</p>
+      <p><strong>Arquivo 2:</strong> prototipo_NomeAluno.png ou prototipo_NomeAluno.jpg</p>
+      <p><strong>Local de entrega:</strong> Google Classroom.</p>
+      <p><strong>Valor:</strong> 20 pontos.</p>
+
+      <div class="tip">
+        A entrega ideal possui dois arquivos: o PDF desta atividade preenchida e a imagem do protótipo anexada separadamente.
+      </div>
+
+      <div class="actions">
+        <button onclick="window.print()">Salvar atividade em PDF</button>
+        <button class="green" onclick="preencherExemplo()">Preencher exemplo</button>
+        <button class="danger" onclick="limparCampos()">Limpar respostas</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Inovação Tecnológica e Empreendedorismo – Aula 13 – Introdução ao Design Thinking
+  </footer>
+
+  <script>
+    function limparCampos() {
+      if (!confirm("Deseja apagar todas as respostas preenchidas?")) return;
+      document.querySelectorAll("input, textarea").forEach(campo => campo.value = "");
+      document.querySelectorAll("select").forEach(campo => campo.selectedIndex = 0);
+    }
+
+    function preencherExemplo() {
+      const respostas = [
+        "Os alunos esquecem datas de provas, trabalhos e atividades.",
+        "Estudantes, professores e equipe pedagógica.",
+        "Os alunos perdem prazos, ficam ansiosos e acumulam tarefas. Os professores também têm mais dificuldade para receber as atividades no prazo.",
+        "O que mais dificulta sua organização nos estudos durante a semana?",
+        "Como podemos ajudar os alunos a organizar melhor suas atividades escolares e reduzir atrasos nas entregas?",
+        "Criar um mural digital com as datas importantes da turma.",
+        "Funcionaria porque todos poderiam visualizar os prazos em um único local.",
+        "Criar um aplicativo simples de lembretes escolares.",
+        "Funcionaria porque enviaria alertas antes das datas de entrega.",
+        "Criar um grupo com avisos semanais organizados.",
+        "Funcionaria porque facilitaria a comunicação entre alunos e professor.",
+        "Criar cartazes na sala com os prazos principais.",
+        "Funcionaria porque mantém a informação visível no ambiente escolar.",
+        "Criar uma agenda semanal impressa.",
+        "Funcionaria para alunos que têm dificuldade com ferramentas digitais.",
+        "A melhor ideia é o aplicativo simples de lembretes escolares, pois ajuda o aluno a receber avisos antes dos prazos e centraliza as tarefas.",
+        "Agenda Escolar Inteligente",
+        "prototipo_agenda_escolar.png",
+        "O protótipo representa um aplicativo com tela inicial de tarefas, calendário de provas, botão de adicionar atividade e alerta de prazo próximo.",
+        "Um colega sugeriu deixar as tarefas separadas por disciplina.",
+        "Outro colega disse que seria importante ter notificações antes do prazo final.",
+        "Também foi sugerido incluir cores para identificar tarefas urgentes.",
+        "Eu adicionaria filtros por disciplina e uma área de tarefas urgentes.",
+        "Aprendi que Design Thinking é uma forma de resolver problemas começando pelas necessidades das pessoas.",
+        "A empatia ajudou porque mostrou que a solução precisa fazer sentido para quem realmente enfrenta o problema.",
+        "Sim, porque a ideia ajuda os alunos a visualizar prazos, receber lembretes e organizar melhor os estudos."
+      ];
+
+      const campos = document.querySelectorAll("textarea, input[type='text']");
+      campos.forEach((campo, index) => {
+        if (respostas[index]) campo.value = respostas[index];
+      });
+    }
+  </script>
+</body>
+</html>
